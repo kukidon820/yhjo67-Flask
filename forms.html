@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Динамическая форма</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Динамическая форма</h2>
+
+
+    <form method="POST">
+        <div id="inputsContainer">
+            <div class="input-group">
+                <label>Name: </label>
+                <input type="text" name="name" required>
+            </div>
+        </div>
+
+        <button type="button" id="addInput">Добавить поле</button>
+        <br>
+        <button type="submit">Сохранить</button>
+    </form>
+
+    <script>
+        let inputCount = 1;
+
+        $(document).ready(function() {
+            $('#addInput').click(function() {
+                const newInputGroup = `
+                    <div class="input-group">
+                        <label>Name${inputCount}: </label>
+                        <input type="text" name="name${inputCount}">
+                        <button type="button" class="remove-btn">Удалить</button>
+                    </div>
+                `;
+                $('#inputsContainer').append(newInputGroup);
+                inputCount++;
+            });
+
+            $(document).on('click', '.remove-btn', function() {
+                $(this).closest('.input-group').remove();
+            });
+        });
+    </script>
+</body>
+</html>

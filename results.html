@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты</title>
+
+</head>
+<body>
+    <h2>Сохраненные формы</h2>
+
+    {% for form in forms %}
+        <div class="form-card">
+            <h3>Форма #{{ form.id }}</h3>
+            {% for key, value in form.data.items() %}
+                <div class="field"><strong>{{ key }}:</strong> {{ value }}</div>
+            {% endfor %}
+            <small>Дата: {{ form.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+        </div>
+    {% else %}
+        <p>Нет сохраненных форм.</p>
+    {% endfor %}
+
+    <a href="{{ url_for('form') }}" class="back-link"> Создать новую форму</a>
+</body>
+</html>
